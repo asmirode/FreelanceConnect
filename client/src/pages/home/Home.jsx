@@ -17,7 +17,7 @@ function Home() {
           <CatCard key={card.id} card={card} />
         ))}
       </Slide>
-      <div className="features">
+      {/* <div className="features">
         <div className="container">
           <div className="item">
             <h1>A whole world of freelance talent at your fingertips</h1>
@@ -58,8 +58,8 @@ function Home() {
             <video src="./img/video.mp4" controls />
           </div>
         </div>
-      </div>
-      <div className="explore">
+      </div> */}
+      {/* <div className="explore">
         <div className="container">
           <h1>Explore the marketplace</h1>
           <div className="items">
@@ -146,20 +146,24 @@ function Home() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       <div className="features dark">
         <div className="container">
           <div className="item">
             <h1>
-              fiverr <i>business</i>
+              FreelanceConnect <i>Matcher</i>
             </h1>
             <h1>
-              A business solution designed for <i>teams</i>
+              Match with Freelancers Instantly
             </h1>
             <p>
-              Upgrade to a curated experience packed with tools and benefits,
-              dedicated to businesses
+              Upgrade to a curated experience packed with AI tools
             </p>
+            <div className="title">
+              <img src="./img/check.png" alt="" />
+               Discover freelancers tailored to your needs using our smart matching algorithm.
+            </div>
+
             <div className="title">
               <img src="./img/check.png" alt="" />
               Connect to freelancers with proven business experience
@@ -167,18 +171,13 @@ function Home() {
 
             <div className="title">
               <img src="./img/check.png" alt="" />
-              Get matched with the perfect talent by a customer success manager
+              AI-powered recommendations for your projects
             </div>
-
-            <div className="title">
-              <img src="./img/check.png" alt="" />
-              Manage teamwork and boost productivity with one powerful workspace
-            </div>
-            <button>Explore Fiverr Business</button>
+            <button>Explore FreelanceConnect Matcher</button>
           </div>
           <div className="item">
             <img
-              src="https://fiverr-res.cloudinary.com/q_auto,f_auto,w_870,dpr_2.0/v1/attachments/generic_asset/asset/d9c17ceebda44764b591a8074a898e63-1599597624768/business-desktop-870-x2.png"
+              src="/img/becoming-a-freelancer---Elorus-Blog.jpg"
               alt=""
             />
           </div>
