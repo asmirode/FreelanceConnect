@@ -7,15 +7,14 @@ import newRequest from "../../utils/newRequest";
 
 function MyGigs() {
   const currentUser = getCurrentUser();
-
   const queryClient = useQueryClient();
 
   const { isLoading, error, data } = useQuery({
     queryKey: ["myGigs"],
     queryFn: () =>
-      newRequest.get(`/gigs?userId=${currentUser.id}`).then((res) => {
-        return res.data;
-      }),
+      newRequest.get(`/gigs?userId=${currentUser._id}`).then((res) => res.data),
+    // Only fetch if we have a currentUser
+    enabled: !!currentUser?._id,
   });
 
   const mutation = useMutation({
@@ -31,23 +30,26 @@ function MyGigs() {
     mutation.mutate(id);
   };
 
+  // Show loading state
+  if (isLoading) return <div className="myGigs">Loading...</div>;
+
+  // Show error state
+  if (error) return <div className="myGigs">Error: {error.message}</div>;
+
+  // Show not logged in state
+  if (!currentUser) return <div className="myGigs">Please login first</div>;
+
   return (
     <div className="myGigs">
-      {isLoading ? (
-        "loading"
-      ) : error ? (
-        "error"
-      ) : (
-        <div className="container">
-          <div className="title">
-            <h1>Gigs</h1>
-            {currentUser.isSeller && (
-              <Link to="/add">
-                <button>Add New Gig</button>
-              </Link>
-            )}
-          </div>
-          <table>
+      <div className="container">
+        <div className="title">
+          <h1>Gigs</h1>
+          <Link to="/add">
+            <button>Add New Gig</button>
+          </Link>
+        </div>
+        <table>
+          <thead>
             <tr>
               <th>Image</th>
               <th>Title</th>
@@ -55,7 +57,9 @@ function MyGigs() {
               <th>Sales</th>
               <th>Action</th>
             </tr>
-            {data.map((gig) => (
+          </thead>
+          <tbody>
+            {data?.map((gig) => (
               <tr key={gig._id}>
                 <td>
                   <img className="image" src={gig.cover} alt="" />
@@ -66,16 +70,16 @@ function MyGigs() {
                 <td>
                   <img
                     className="delete"
-                    src="./img/delete.png"
+                    src="/img/delete.png"
                     alt=""
                     onClick={() => handleDelete(gig._id)}
                   />
                 </td>
               </tr>
             ))}
-          </table>
-        </div>
-      )}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

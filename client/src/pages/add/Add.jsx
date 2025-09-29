@@ -54,15 +54,35 @@ const Add = () => {
     mutationFn: (gig) => {
       return newRequest.post("/gigs", gig);
     },
-    onSuccess: () => {
+    onSuccess: (response) => {
       queryClient.invalidateQueries(["myGigs"]);
+      navigate(`/gig/${response.data._id}`); // Navigate to the created gig
+    },
+    onError: (err) => {
+      console.log("Error creating gig:", err); // Log any errors
     },
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    mutation.mutate(state);
-    // navigate("/mygigs")
+
+    // Check if required fields are present
+    if (!state.title || !state.desc || !state.cat || !state.price) {
+      console.log("Please fill all required fields");
+      return;
+    }
+
+    // Check if images are still uploading
+    if (uploading) {
+      console.log("Please wait for images to upload");
+      return;
+    }
+
+    try {
+      mutation.mutate(state);
+    } catch (err) {
+      console.log("Submit error:", err);
+    }
   };
 
   return (

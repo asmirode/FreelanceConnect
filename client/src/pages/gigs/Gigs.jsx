@@ -42,11 +42,11 @@ function Gigs() {
   return (
     <div className="gigs">
       <div className="container">
-        <span className="breadcrumbs">FreelanceConnect &gt; Graphics &amp; Design &gt;</span>
+        {/* <span className="breadcrumbs">FreelanceConnect &gt; Graphics &amp; Design &gt;</span>
         <h1>AI Artists</h1>
         <p>
           Explore the boundaries of art and technology with FreelanceConnect's AI artists
-        </p>
+        </p> */}
         <div className="menu">
           <div className="left">
             <span>Budget</span>
